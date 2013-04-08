@@ -3,13 +3,12 @@
  * Created: 4/7/13
  * Author: Viacheslav Panasenko
  */
-package com.breezy.android;
+package com.breezy.android.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import com.breezy.android.R;
 
 /**
  * KahunaSampleActivity
@@ -29,6 +28,7 @@ public class KahunaSampleActivity extends Activity
         // Initialize Kahuna SDK and send start event (should be done once per application start).
         KahunaSdk sdk = KahunaSdk.getInstance();
         sdk.initSdk(this, KAHUNA_API_KEY);
+        sdk.setAppAndOsDetails(this);
         sdk.sendEvent(KahunaSdk.KahunaEvents.START);
     }
 
@@ -45,7 +45,7 @@ public class KahunaSampleActivity extends Activity
      * Called when send event button is clicked.
      * @param v Reference to the parent view (send event button).
      */
-    public void onSendEvent(View v)
+    public void onSendEventClicked(View v)
     {
         Button sendEvent = (Button) v;
         KahunaSdk.getInstance().sendEvent(sendEvent.getText().toString() + " clicked");

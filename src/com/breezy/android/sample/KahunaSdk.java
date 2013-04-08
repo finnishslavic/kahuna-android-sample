@@ -3,7 +3,7 @@
  * Created: 4/3/13
  * Author: Viacheslav Panasenko
  */
-package com.breezy.android;
+package com.breezy.android.sample;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -128,6 +128,10 @@ public class KahunaSdk
             if (info.applicationInfo != null)
             {
                 mAppName = pm.getApplicationLabel(info.applicationInfo).toString();
+            }
+            else
+            {
+                mAppName = appContext.getString(R.string.app_name);
             }
 
         } catch (PackageManager.NameNotFoundException e)
@@ -266,9 +270,21 @@ public class KahunaSdk
         params.put(EVENT_FIELD, event);
 
         mHttpClient.post(KAHUNA_ENDPOINT, params, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onFailure(Throwable throwable, String s)
+            {
+                super.onFailure(throwable, s);
+                Log.d(TAG, "Failed to send request: " + s, throwable);
+            }
+
             @Override
             public void onSuccess(String s)
             {
+                // IMPORTANT NOTE: onSuccess called when the post is successful, which doesn't
+                // always mean the server processed the post successfully, e.g. sending an empty
+                // API key results in the following message:
+                // {"error_message": "A Server Error Has Occurred", "success": false}
                 Log.d(TAG, "Successfully sent request: " + s);
             }
         });
