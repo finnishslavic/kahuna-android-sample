@@ -27,7 +27,7 @@ public class KahunaSdk
     private static final String KAHUNA_ENDPOINT = "https://tap-nexus.appspot.com/log";
 
     private static final String API_KEY_FIELD = "key";
-    private static final String DEVICE_ID_FIELD = "dev_Id";
+    private static final String DEVICE_ID_FIELD = "dev_id";
     private static final String USERNAME_FIELD = "username";
     private static final String USER_EMAIL_FIELD = "user_email";
     private static final String FIRST_NAME_FIELD = "first_name";
